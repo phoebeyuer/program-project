@@ -2,7 +2,7 @@
 	<div class="register-index-container">
 		<div class="register-pannel">
 			<div class="pannel-container">
-				<img class="index-logo" src="./../../assets/image/index-logo.png">
+				<img class="index-logo" src="./../../assets/image/index-logo.png"/>
 				<router-link to="/home"><span id="firstTag">首页</span></router-link>
 				<router-link to="/knowledge"><span>知识体系</span></router-link>
 				<span>话题</span>
