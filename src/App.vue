@@ -1,7 +1,9 @@
 <template>
+  <!-- <EasyScrollbar> -->
   <div id="app">
     <router-view/>
   </div>
+  <!-- </EasyScrollbar> -->
 </template>
 
 <script>

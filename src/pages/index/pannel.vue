@@ -3,19 +3,26 @@
 		<div class="register-pannel">
 			<div class="pannel-container">
 				<img class="index-logo" src="./../../assets/image/index-logo.png"/>
-				<router-link to="/home"><span id="firstTag">首页</span></router-link>
-				<router-link to="/knowledge"><span>知识体系</span></router-link>
-				<span>话题</span>
-				<span>博客</span>
-				<router-link to="/loggin"><span>登录</span></router-link>
+				<router-link to="/home" tag="span"><span class="tab-link" id="firstTag">首页</span></router-link>
+				<router-link to="/knowledge" tag="span"><span class="tab-link" >知识体系</span></router-link>
+				<router-link to="/topic" tag="span"><span class="tab-link" >话题</span></router-link>
+				<router-link to="/blog" tag="span"><span class="tab-link" >博客</span></router-link>
+				<router-link to="/loggin" tag="span"><span class="tab-link" >登录</span></router-link>
+			</div>		
+		</div>
+			<div class="index-main">
 				<router-view></router-view>
 			</div>
-		</div>
+			<IndexBottom></IndexBottom>
 	</div>
 </template>
 
 <script>
+	import IndexBottom from './indexBottom'
 	export default {
+		components: {
+			IndexBottom
+		},
 		data(){
 			return {
 				msg: 'hello word!'
@@ -27,12 +34,15 @@
 <style type="text/css" scoped>
 	.register-index-container {
 		width: 100%;
-		height: 100%;
+		height: 90px;
 		background: #efefef;
 	}
 
 	/*注册及登录页面导航栏样式*/
 	.register-pannel {
+		position: fixed;
+		z-index: 100;
+		top: 0px;
 		background: #fff;
 		height: 90px;
 		width: 100%;
@@ -56,7 +66,13 @@
 		overflow: hidden;
 	}
 
-	span {
+	.router-link-active .tab-link{
+		color: red;
+		padding-bottom: 20px;
+		border-bottom: 5px solid red;
+	}
+
+	.tab-link {
 		margin-left: 46px;
 		height: 90px;
 		line-height: 90px;
@@ -64,8 +80,17 @@
 		color: black;
 		font-size: 18px;
 	}
+
+	.tab-link:hover {
+		color: red;
+	}
 	
 	#firstTag {
 		margin-left: 600px;
+	}
+
+	.index-main {
+		width: 1200px;
+		margin: 0 auto;
 	}
 </style>

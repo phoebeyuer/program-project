@@ -48,7 +48,7 @@
 		width: 530px;
 		height: 420px;
 		margin: 0 auto;
-		margin-top: 80px;
+		margin-top: 170px;
 		background: #fff;
 		box-shadow: #b1b1b1 1px 1px 8px 1px ;
 	}
