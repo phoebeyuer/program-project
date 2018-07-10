@@ -3,12 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import EasyScroll from 'easyscroll'
+import axios from 'axios'
 // import 'lib-flexible'
 import './assets/reset.css'
 import './assets/styles/iconfont.css'
 
-Vue.use(EasyScroll)
+// 将aixos改写为Vue的原型属性
+Vue.prototype.$ajax = axios;
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

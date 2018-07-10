@@ -1,5 +1,5 @@
 <template>
-	<div class="register-index-container">
+	<div class="register-index-container">		
 		<div class="register-pannel">
 			<div class="pannel-container">
 				<img class="index-logo" src="./../../assets/image/index-logo.png"/>
@@ -13,7 +13,7 @@
 			<div class="index-main">
 				<router-view></router-view>
 			</div>
-			<IndexBottom></IndexBottom>
+			<IndexBottom></IndexBottom>		
 	</div>
 </template>
 

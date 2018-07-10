@@ -18,17 +18,17 @@ exports.cssLoaders = function (options) {
   const cssLoader = {
     loader: 'css-loader',
     options: {
-      // minimize: process.env.NODE_ENV === 'production',
+      minimize: process.env.NODE_ENV === 'production',
       sourceMap: options.sourceMap
     }
   }
 
-/*  const px2remLoader = {          //px2remLoader配置
-    loader: 'px2rem-loader',
-    options: {
-      remUnit: 192
-    }
-  }*/
+  // const px2remLoader = {          //px2remLoader配置
+  //   loader: 'px2rem-loader',
+  //   options: {
+  //     remUnit: 192
+  //   }
+  // }
 
   const postcssLoader = {
     loader: 'postcss-loader',
@@ -55,7 +55,8 @@ exports.cssLoaders = function (options) {
     if (options.extract) {
       return ExtractTextPlugin.extract({
         use: loaders,
-        fallback: 'vue-style-loader'
+        fallback: 'vue-style-loader',
+        publicPath: '../../'
       })
     } else {
       return ['vue-style-loader'].concat(loaders)
