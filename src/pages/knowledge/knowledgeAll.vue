@@ -1,5 +1,9 @@
 <template>
 	<div class="hot-artical-container">
+		<div class="toggle-btn">
+			<div @click="toggleNewest" v-bind:class="[newest,{active: activeNewest}]">最新知识</div>
+			<div @click="toggleHottest" v-bind:class="[hottest,{active: activeHottest}]">最热知识</div>
+		</div>
 		<ul>
 			<li v-for="(item,index) in hotArtical" 
 				:key="index"
@@ -30,6 +34,10 @@
 	export default {
 		data() {
 			return {
+				activeNewest: true,
+				activeHottest: false,
+				newest: 'newest',
+				hottest: 'hottest',
 				hotArtical: [
 				{
 					pubName: '银月',
@@ -67,7 +75,15 @@
 		methods: {
 			goToArtical(index) {
 				console.log('点击了' + index)
-			}
+			},
+			toggleNewest() {
+				this.activeNewest = true;
+				this.activeHottest = false;
+			},
+			toggleHottest() {
+				this.activeNewest = false;
+				this.activeHottest = true;
+			},
 		}
 	}
 </script>
@@ -76,6 +92,49 @@
 	.hot-artical-container {
 		/*margin-top: 20px;*/
 		font-family: '微软雅黑';
+	}
+
+	.toggle-btn {
+		width: 1200px;
+		height: 45px;
+	}
+
+	.newest {
+		display: inline-block;
+		margin-right: 20px;
+		margin-top: 15px;
+		height: 30px;
+		width: 90px;
+		text-align: center;
+		line-height: 30px;
+		font-size: 16px;
+		cursor: pointer;
+	}
+
+	.hottest {
+		display: inline-block;
+		margin-top: 15px;
+		height: 30px;
+		width: 90px;
+		text-align: center;
+		line-height: 30px;
+		font-size: 16px;
+		cursor: pointer;
+	}
+
+	.active {
+		background: #e7171e;
+		color: white;		
+	}
+
+	.newest:hover {
+		background: #e7171e;
+		color: white;
+	}
+
+	.hottest:hover {
+		background: #e7171e;
+		color: white;
 	}
 
 	li {

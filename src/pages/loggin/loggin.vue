@@ -107,16 +107,16 @@
 				console.log(e.target.value.trim());
 				if(e.target.value.trim().search(/[0-9]/g) != -1 && e.target.value.trim().search(/[a-zA-Z]/g) != -1) {
 					console.log('密码输入格式正确');
-					if(e.target.value.trim().length >= 6) {
+					if(e.target.value.trim().length >= 6 && e.target.value.trim().length <= 20) {
 						console.log('密码位数正确');
 						this.showicon2 = true;
 						this.showCodeInputError = '';
 						this.showBorder2 = false;
 					}
 					else {
-						console.log('密码位数不足6位，请重新输入');
+						console.log('密码长度为6-20位，请重新输入');
 						this.showicon2 = false;
-						this.showCodeInputError = '密码位数不足6位，请重新输入';
+						this.showCodeInputError = '密码长度为6-20位，请重新输入';
 						this.showBorder2 = true;
 					}
 				}

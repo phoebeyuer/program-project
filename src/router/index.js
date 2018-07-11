@@ -48,7 +48,35 @@ export default new Router({
       {
         path: 'knowledge',
         name: 'Knowledge',
-        component: () => import('@/pages/index/components/knowledge')
+        component: () => import('@/pages/index/components/knowledge'),
+        redirect: {name: 'KnowledgeAll'},
+        children: [
+        {
+          path: 'knowledgeAll',
+          name: 'KnowledgeAll',
+          component: () => import('@/pages/knowledge/knowledgeAll')
+        },
+        {
+          path: 'knowledgeHtml',
+          name: 'KnowledgeHtml',
+          component: () => import('@/pages/knowledge/knowledgeHtml')
+        },
+        {
+          path: 'knowledgeCss',
+          name: 'KnowledgeCss',
+          component: () => import('@/pages/knowledge/knowledgeCss')
+        },
+        {
+          path: 'knowledgeJavascript',
+          name: 'KnowledgeJavascript',
+          component: () => import('@/pages/knowledge/knowledgeJavascript')
+        },
+        {
+          path: 'knowledgeWebpack',
+          name: 'KnowledgeWebpack',
+          component: () => import('@/pages/knowledge/knowledgeWebpack')
+        },
+        ]
       },
       {
         path: 'topic',
@@ -58,7 +86,35 @@ export default new Router({
       {
         path: 'blog',
         name: 'Blog',
-        component: () => import('@/pages/index/components/blog')
+        component: () => import('@/pages/index/components/blog'),
+        redirect: {name: 'BlogAllType'},
+        children: [
+        {
+          path: 'blogAllType',
+          name: 'BlogAllType',
+          component: () => import('@/pages/blog/blogAllType'),
+        },
+        {
+          path: 'blogPrimary',
+          name: 'BlogPrimary',
+          component: () => import('@/pages/blog/blogPrimary'),
+        },
+        {
+          path: 'blogShareExperience',
+          name: 'BlogShareExperience',
+          component: () => import('@/pages/blog/blogShareExperience'),
+        },
+        {
+          path: 'blogShareProject',
+          name: 'BlogShareProject',
+          component: () => import('@/pages/blog/blogShareProject'),
+        },
+        {
+          path: 'blogWrite',
+          name: 'BlogWrite',
+          component: () => import('@/pages/blog/blogWrite'),
+        },
+        ]
       },
       {
         path: 'loggin',

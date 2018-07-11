@@ -18,7 +18,7 @@
 						<input :class="showBorder2 ? 'register-box show-box-border' : 'register-box'"
 						       type="password" 
 						       name="inputPassword" 
-						       placeholder="请输入6位以上含字母及数字的密码"
+						       placeholder="请输入6-20位含字母及数字的密码"
 						       @blur="checkRegisterCode"/>
 						<span :class="showicon2 ? 'icon-show iconfont' : 'icon-hidden iconfont'">&#xe625;</span>	
 					</div>
@@ -34,10 +34,14 @@
 					<div class="show-error">{{showCodeInputError2}}</div>
 					<div class="table-intergrate">
 						<div class="random-box">
-							<input class="register-box2" type="text" name="inputName" placeholder="请输入验证码" @blur="checkRandomCode"/>
+							<input :class="showRandomBorder ? 'register-box2 show-random-border' : 'register-box2'" 
+							       type="text" 
+							       name="inputName" 
+							       placeholder="请输入验证码" 
+							       @blur="checkRandomCode"/>
 							<span :class="showicon4 ? 'icon-show iconfont' : 'icon-hidden iconfont'">&#xe625;</span>
 						</div>
-						<input type="button" id="randomCode" @click="createCode" v-model="checkCode"></div>
+						<input type="button" id="randomCode" @click="createCode();createBackground()" v-model="checkCode"></div>
 					</div>
 					<div class="random-code-error">{{randomCodeError}}</div>
 <!-- 					<div class="table-intergrate">
@@ -67,37 +71,57 @@
 				showBorder3: false,
 				registerCode: '',
 				checkCode: '',
-				randomCodeError: ''
+				randomCodeError: '',
+				showRandomBorder: false
 			}
 		},
 		mounted() {
 			console.log(window.innerWidth + 'px');
 			this.createCode();
 		},
-		methods: {
+		methods: { 
+			// 产生随机验证码函数
 			createCode() {
 			  var code = ""; 
 			  var codeLength = 4;//验证码的长度 
-			  var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R', 'S','T','U','V','W','X','Y','Z');//随机数 
-			  for(var i = 0; i < codeLength; i++) {
-			   //循环操作 
-			   var index = Math.floor(Math.random()*36);//取得随机数的索引（0~35） 
-			   code += random[index];//根据索引取得随机数加到code上 
+			  var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R', 'S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z');
+			  for(var i = 0; i < codeLength; i++) { 
+			   var index = Math.floor(Math.random()*62);//取得随机数的索引（0~35） 
+			   code += random[index];
 			  } 
-			  this.checkCode = code;//把code值赋给验证码 
+			  this.checkCode = code;
 			},
+			// 生成随机数
+			creatRandomNum(min,max) {
+				return Math.floor(Math.random() * (max-min) + min);
+			},
+			//随机生成背景颜色
+			createBackground() {
+				console.log("createBackground success");
+				let r = this.creatRandomNum(0, 255);
+				let g = this.creatRandomNum(0, 255);
+				let b = this.creatRandomNum(0, 255);
+				let randomCodeRGB = '#' +  r.toString(16) + g.toString(16) + b.toString(16);
+				console.log(randomCodeRGB);
+				let randomCodeBg = document.getElementById("randomCode");
+				randomCodeBg.style.backgroundColor = randomCodeRGB; 
+			},
+			// 检查用户输入的随机码是否正确
 			checkRandomCode(e) {
-				if(e.target.value.trim() == this.checkCode) {
+				if(e.target.value.trim().toUpperCase() == this.checkCode.toUpperCase()) {
 					this.showicon4 = true;
 					this.randomCodeError = '';
+					this.showRandomBorder = false;
 				}
 				else {
 					console.log('验证码有误');
 					this.showicon4 = false;
-					this.randomCodeError = '验证码有误';
+					this.randomCodeError = '验证码有误';	
+					this.showRandomBorder = true;
 
 				}
 			},
+			// 检查用户输入的注册手机号码是否正确
 			checkRegisterNumber(e) {
 				console.log(e.target.value.trim());
 				if(e.target.value.trim().search(/[^0-9]/g) == -1){
@@ -119,11 +143,12 @@
 					this.showBorder = true;
 				}				
 			},
+			// 检查用户输入的注册密码格式是否正确
 			checkRegisterCode(e) {
 				console.log(e.target.value.trim());
 				if(e.target.value.trim().search(/[0-9]/g) != -1 && e.target.value.trim().search(/[a-zA-Z]/g) != -1) {
 					console.log('密码输入格式正确');
-					if(e.target.value.trim().length >= 6) {
+					if(e.target.value.trim().length >= 6 && e.target.value.trim().length <= 20) {
 						console.log('密码位数正确');
 						this.showicon2 = true;
 						this.showCodeInputError = '';
@@ -131,9 +156,9 @@
 						this.registerCode = e.target.value.trim();
 					}
 					else {
-						console.log('密码位数不足6位，请重新输入');
+						console.log('密码长度为6-20位，请重新输入');
 						this.showicon2 = false;
-						this.showCodeInputError = '密码位数不足6位，请重新输入';
+						this.showCodeInputError = '密码长度为6-20位，请重新输入';
 						this.showBorder2 = true;
 						this.registerCode = e.target.value.trim();
 					}
@@ -145,7 +170,8 @@
 					this.showBorder2 = true;
 					this.registerCode = e.target.value.trim();
 				}
-			},			
+			},		
+			// 检查用户第二次输入的密码是否与第一次相同	
 			checkRegisterCodeAgain(e) {
 				if(e.target.value.trim().length == 0) {
 					this.showCodeInputError2 = '请再次输入密码';
@@ -262,6 +288,10 @@
 		border-radius: 2px;
 	}
 
+	.show-random-border {
+		border: 1px solid #f20e33;
+	}
+
 	#randomCode {
 		float: right;
 		margin-right: 20px;
@@ -271,6 +301,10 @@
 		text-align: center;
 		border: 1px solid #efefef;
 		cursor: pointer;
+		text-align: center;
+		color: #053d84;
+		letter-spacing: 5px;
+		font-weight: bold;
 	}
 
 	.random-code-error {

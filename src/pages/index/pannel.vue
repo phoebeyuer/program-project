@@ -33,6 +33,7 @@
 
 <style type="text/css" scoped>
 	.register-index-container {
+		margin-top: 120px;
 		width: 100%;
 		height: 90px;
 		background: #efefef;
