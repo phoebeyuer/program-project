@@ -12,7 +12,7 @@
 				     </span>
 			    </router-link>
 			</li>
-			<router-link to="/blog/blogWrite"><div class="write-blog">写博客</div></router-link>
+			<router-link to="/blogWrite"><div class="write-blog">写博客</div></router-link>
 		</div>
 		<div class="title-line">
 		</div>

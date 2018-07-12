@@ -109,11 +109,6 @@ export default new Router({
           name: 'BlogShareProject',
           component: () => import('@/pages/blog/blogShareProject'),
         },
-        {
-          path: 'blogWrite',
-          name: 'BlogWrite',
-          component: () => import('@/pages/blog/blogWrite'),
-        },
         ]
       },
       {
@@ -125,7 +120,13 @@ export default new Router({
         path: 'register',
         name: 'Register',
         component: () => import('@/pages/register/register')
-      }]     
+      },
+      {
+        path: 'blogWrite',
+        name: 'BlogWrite',
+        component: () => import('@/pages/blog/blogWrite'),
+      },
+        ]     
     }
   ]
 })
