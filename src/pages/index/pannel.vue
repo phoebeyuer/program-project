@@ -27,7 +27,7 @@
 			return {
 				msg: 'hello word!'
 			}
-		}
+		},
 	}
 </script>
 
@@ -80,6 +80,7 @@
 		cursor: pointer;
 		color: black;
 		font-size: 18px;
+		transition: 0.2s;
 	}
 
 	.tab-link:hover {

@@ -66,7 +66,9 @@
 		methods: {
 			goToArtical(index) {
 				console.log('点击了' + index)
-			}
+			},
+
+			
 		}
 	}
 </script>
