@@ -7,8 +7,8 @@
 			<swiper-slide><img class="swiper-pic" src="./../../assets/image/swiper-pic4.png"/></swiper-slide>
 			<swiper-slide><img class="swiper-pic" src="./../../assets/image/swiper-pic5.png"/></swiper-slide>
 			<div class="swiper-pagination" slot="pagination"></div>
-			<!-- <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div> -->
-			<!-- <div class="swiper-button-next swiper-button-white" slot="button-next"></div> -->
+			<div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+			<div class="swiper-button-next swiper-button-white" slot="button-next"></div>
 		</swiper>	
 	</div>
 </template>
@@ -42,10 +42,10 @@
 					// 	crossFade: false
 					// },
 					effect: 'slide',
-					// navigation: {
-					// 	nextEl: '.swiper-button-next',
-					// 	prevEl: '.swiper-button-prev',
-					// }
+					navigation: {
+						nextEl: '.swiper-button-next',
+						prevEl: '.swiper-button-prev',
+					}
 				}
 			}
 		},

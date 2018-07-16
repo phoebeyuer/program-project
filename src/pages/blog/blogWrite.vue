@@ -1,5 +1,5 @@
 <template>
-	<div id="blog-container">
+	<div id="blog-container" @click=hideClassifyBox($event)>
 		<div class="blog-information">
 			<div class="blog-title">
 				<div class="info-text">文章标题</div>
@@ -10,29 +10,49 @@
 			</div>
 			<div class="blog-select blog-classify">
 				<div class="info-text">所属分类</div>
-				<a href="javascript:;" class="classify-box classify-box1" @click="showClassifyList">
-					<div class="box-text">{{choosebox1}}</div>
-					<div class="iconfont">&#xe79b;</div>
-					<ul v-bind:class="{classifyBoxShow: isClassifyShow, classifyBoxHidden: isClassifyHidden}">
+				<a id="classifyBox" href="javascript:;" class="classify-box classify-box1">
+					<div  @click="showClassifyList">
+						<input type="text" readonly="readonly" class="box-text" placeholder="请选择" :value="choosebox1"/>
+						<div class="iconfont">&#xe79b;</div>
+					</div>
+					<!-- <ul v-bind:class="{classifyBoxShow: isClassifyShow, classifyBoxHidden: isClassifyHidden}">
 						<li @click="chooseItem($event)">入门学习</li>
 						<li @click="chooseItem($event)">经验分享</li>
 						<li @click="chooseItem($event)">开源项目</li>
-					</ul>
+					</ul> -->
 				</a>
 			</div>
 			<div class="blog-select blog-type">
 				<div class="info-text">技术分类</div>
-				<a href="javascript:;" class="classify-box classify-box1">
-					<div class="box-text">{{choosebox2}}</div>
-					<div class="iconfont">&#xe79b;</div>
-					<ul v-bind:class="{classifyBoxShow: isClassifyShow, classifyBoxHidden: isClassifyHidden}">
+				<a id="classifyBox2" href="javascript:;" class="classify-box classify-box1">
+					<div @click="showClassifyList2">
+						<input type="text" readonly="readonly" class="box-text" placeholder="请选择" :value="choosebox2" />
+						<div class="iconfont">&#xe79b;</div>
+					</div>
+<!-- 					<ul v-bind:class="{classifyBoxShow2: isClassifyShow2, classifyBoxHidden2: isClassifyHidden2}">
 						<li @click="chooseItem2($event)">Html</li>
 						<li @click="chooseItem2($event)">Css</li>
 						<li @click="chooseItem2($event)">Javascript</li>
 						<li @click="chooseItem2($event)">Webpack</li>
 						<li @click="chooseItem2($event)">其它</li>
-					</ul>
+					</ul> -->
 				</a>
+			</div>
+			<div class="ul-container">
+					<ul v-bind:class="{classifyBoxShow: isClassifyShow, classifyBoxHidden: isClassifyHidden}">
+						<li @click="chooseItem($event)">入门学习</li>
+						<li @click="chooseItem($event)">经验分享</li>
+						<li @click="chooseItem($event)">开源项目</li>
+					</ul>
+			</div>
+			<div class="ul-container2">
+					<ul v-bind:class="{classifyBoxShow2: isClassifyShow2, classifyBoxHidden2: isClassifyHidden2}">
+						<li @click="chooseItem2($event)">Html</li>
+						<li @click="chooseItem2($event)">Css</li>
+						<li @click="chooseItem2($event)">Javascript</li>
+						<!-- <li @click="chooseItem2($event)">Webpack</li> -->
+						<!-- <li @click="chooseItem2($event)">其它</li> -->
+					</ul>
 			</div>
 		</div>
 		<div id="editor">
@@ -64,8 +84,10 @@
 				msg: 'hello blogWrite!',
 				isClassifyShow: false,
 				isClassifyHidden: true,
-				choosebox1: '请选择',
-				choosebox2: '请选择',
+				isClassifyShow2: false,
+				isClassifyHidden2: true,
+				choosebox1: '',
+				choosebox2: '',
 				content: '<h2>Write here……<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></h2>',
  				editorOption: {
           			modules: {
@@ -92,23 +114,47 @@
 		    onEditorReady(quill) {
 		      console.log('editor ready!', quill)
 		    },
+		    hideClassifyBox(e) {
+		    	var e = e || window.event;
+		    	var elem = e.target
+		    	while(elem) {
+		    		if(elem.id){
+		    			if( elem.id == 'classifyBox' || elem.id == 'classifyBox2'){
+		    				return;
+		    			}
+		    		}
+		    		elem = elem.parentNode;
+		    	}
+		    	this.isClassifyShow = false;
+		    	this.isClassifyHidden = true;
+		    	this.isClassifyShow2 = false;
+		    	this.isClassifyHidden2 = true;
+		    	console.log('我被触发了');
+		    },
 		    showClassifyList() {
-		    	this.isClassifyShow = true;
-		    	this.isClassifyHidden = false;
+		    	this.isClassifyShow = !this.isClassifyShow;
+		    	this.isClassifyHidden = !this.isClassifyHidden;
+		    	this.isClassifyShow2 = false;
+		    	this.isClassifyHidden2 = true;
+
+		    },
+		    showClassifyList2() {
+		    	this.isClassifyShow2 = !this.isClassifyShow2;
+		    	this.isClassifyHidden2 = !this.isClassifyHidden2;
+		    	this.isClassifyShow = false;
+		    	this.isClassifyHidden = true;
 		    },
 		    chooseItem(e) {
 		    	this.choosebox1 = e.target.innerText;
 		    	console.log(e.target.innerText);
 		    	this.isClassifyHidden = true;
-		    	// console.log(e.target.value());
-		    	// this.choosebox1 = e.target.value();
+		    	this.isClassifyShow = false;
 		    },
 		    chooseItem2(e) {
 		    	this.choosebox2 = e.target.innerText;
 		    	console.log(e.target.innerText);
-		    	this.isClassifyHidden = true;
-		    	// console.log(e.target.value());
-		    	// this.choosebox1 = e.target.value();
+		    	this.isClassifyHidden2 = true;
+		    	this.isClassifyShow2 = false;
 		    }
 		},
 	    computed: {
@@ -133,10 +179,12 @@
 	}	
 
 	#blog-container {
-		width: 1200px;
+		/*width: 1200px;*/
 		height: 100%;
 		font-weight: normal;
 		font-family: '宋体';
+		position: relative;
+		z-index: 1;
 	}
 
 	.blog-information {
@@ -194,8 +242,17 @@
 		margin-left: 80px;
 	}
 
+	.ul-container {
+		margin-left: 690px;
+	}
+
+	.ul-container2 {
+		margin-left: 1004px;
+	}
+
 	.classify-box {
 		display: inline-block;
+		position: relative;
 		width: 190px;	
 		border: 1px solid #d9d9d9;
 		transition: 0.8s;
@@ -205,6 +262,7 @@
 		background: #fff;
 		cursor: pointer;
 		color: grey;
+		z-index: 9;
 	}
 
 	.classify-box:hover {
@@ -215,38 +273,26 @@
 		border: 1px solid #6dc5f7!important;
 	}
 
-	.classify-box1:focus ul {
-		display: block;
-		position: relative;
-		margin-top: 5px;
-		margin-bottom: 5px;
-		border:1px solid #d9d9d9;
-		transition: 1s;
-		box-shadow: #d5d2d2 0px 0px 5px 1px;
-		z-index: 999;	
-	}
-
-	.classify-box:focus .iconfont {
+/*	.box-text:focus .iconfont {
 		transform: rotate(180deg);
-	}
+	}*/
 
-	.classify-box2:focus ul {
-		display: block;
-		margin-top: 5px;
-		margin-bottom: 5px;
-		border:1px solid #d9d9d9;
-		transition: 1s;
-		box-shadow: #d5d2d2 0px 0px 5px 1px;
-		z-index: 99;	
-	}
+/*	.classify-box .box-text:focus .classify-box{
+		border: 1px solid #6dc5f7;
+	}*/
 
 	.box-text {
 		display: inline-block;
+		position: relative;
 		width: 150px;
 		height: 40px;
 		line-height: 40px;
 		text-indent: 15px;
+		cursor: pointer;
+		border-radius: 5px;
+		z-index: 1;
 	}
+
 
 	.iconfont {
 		display: inline-block;	
@@ -254,15 +300,49 @@
 	}
 
 	.classifyBoxShow {
+		display: block;
+		margin-top: 10px;
+		position: relative;
+		margin-bottom: 5px;
+		border:1px solid #d9d9d9;
+		transition: 1s;
+		box-shadow: #d5d2d2 0px 0px 5px 1px;
+		z-index: 99;
 		background: #fff;
+		height: 120px;
+		transition: height 0.1s;
+		overflow: hidden;
+		width: 190px;
 	}
 
 	.classifyBoxHidden {
-		display: none;
+		/*display: none;*/
+		height: 0px; 
+		transition: height 0.1s;
+		overflow: hidden;
 	}
 
-	ul {
-		display: none;
+	.classifyBoxShow2 {
+		display: block;
+		margin-top: 10px;
+		position: relative;
+		margin-bottom: 5px;
+		border:1px solid #d9d9d9;
+		transition: 1s;
+		box-shadow: #d5d2d2 0px 0px 5px 1px;
+		z-index: 99;
+		height: 120px;
+		background: #fff;
+		overflow: hidden;
+		transition: height 0.15s;
+		width: 190px;
+	}
+
+	.classifyBoxHidden2 {
+		/*display: none;*/
+		height: 0px; 
+		transition: height 0.15s;
+		overflow: hidden;
 	}
 
 	li {
@@ -270,10 +350,7 @@
 		line-height: 40px;
 		text-indent: 15px;
 		z-index: 999;
-	}
-
-	h2 {
-		z-index: 9;
+		cursor: pointer;
 	}
 
 	li:hover {
