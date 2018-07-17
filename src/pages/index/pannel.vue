@@ -36,7 +36,8 @@
 		margin-top: 120px;
 		width: 100%;
 		height: 90px;
-		background: #efefef;
+		/*background: #efefef;*/
+		background: #fff;
 	}
 
 	/*注册及登录页面导航栏样式*/

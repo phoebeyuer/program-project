@@ -197,7 +197,7 @@
 
 	/*注册表单样式*/
 	.register-container {
-		background: #efefef;
+		background: #fff;
 		width: 100%;
 		height: 100%;
 	}
@@ -243,6 +243,7 @@
 		height: 38px;
 		border: 1px solid #efefef;
 		border-radius: 2px;
+		transition: border 0.5s;
 	}
 
 	.show-error {
@@ -286,6 +287,7 @@
 		height: 38px;
 		border: 1px solid #efefef;		
 		border-radius: 2px;
+		transition: border 0.5s;
 	}
 
 	.show-random-border {

@@ -15,11 +15,6 @@
 						<input type="text" readonly="readonly" class="box-text" placeholder="请选择" :value="choosebox1"/>
 						<div class="iconfont">&#xe79b;</div>
 					</div>
-					<!-- <ul v-bind:class="{classifyBoxShow: isClassifyShow, classifyBoxHidden: isClassifyHidden}">
-						<li @click="chooseItem($event)">入门学习</li>
-						<li @click="chooseItem($event)">经验分享</li>
-						<li @click="chooseItem($event)">开源项目</li>
-					</ul> -->
 				</a>
 			</div>
 			<div class="blog-select blog-type">
@@ -29,13 +24,6 @@
 						<input type="text" readonly="readonly" class="box-text" placeholder="请选择" :value="choosebox2" />
 						<div class="iconfont">&#xe79b;</div>
 					</div>
-<!-- 					<ul v-bind:class="{classifyBoxShow2: isClassifyShow2, classifyBoxHidden2: isClassifyHidden2}">
-						<li @click="chooseItem2($event)">Html</li>
-						<li @click="chooseItem2($event)">Css</li>
-						<li @click="chooseItem2($event)">Javascript</li>
-						<li @click="chooseItem2($event)">Webpack</li>
-						<li @click="chooseItem2($event)">其它</li>
-					</ul> -->
 				</a>
 			</div>
 			<div class="ul-container">
@@ -50,8 +38,6 @@
 						<li @click="chooseItem2($event)">Html</li>
 						<li @click="chooseItem2($event)">Css</li>
 						<li @click="chooseItem2($event)">Javascript</li>
-						<!-- <li @click="chooseItem2($event)">Webpack</li> -->
-						<!-- <li @click="chooseItem2($event)">其它</li> -->
 					</ul>
 			</div>
 		</div>
@@ -59,6 +45,7 @@
 			<quill-editor v-model="content"
 						  ref="myQuillEditor"
 						  :options="editorOption"
+						  :handle="toolbarOptions"
 						  @blur="onEditorBlur($event)"
 						  @focus="onEditorFocus($event)"
 						  @ready="onEditorReady($event)"
@@ -74,6 +61,7 @@
 	import 'quill/dist/quill.core.css'
 	import 'quill/dist/quill.snow.css'
 	import 'quill/dist/quill.bubble.css'
+	import Quill from 'quill'
 	import {quillEditor} from 'vue-quill-editor'
 	export default {
 		components: {
@@ -95,8 +83,9 @@
 			              ['bold'],
 			              ['blockquote', 'code-block'],
 			              [{ 'indent': '-1' }, { 'indent': '+1' }],
-			              [{ 'size': ['small', false, 'large', 'huge'] }],
-			              ['link', 'image']
+			              // [{ 'size': ['small', false, 'large', 'huge'] }],
+			              [{ 'size': ['small', 'normal', 'large', 'huge'] }],
+			              ['link', 'image'],
 			            ],
 					},
 					placeholder: 'beggin',
@@ -163,7 +152,8 @@
 	        }
 	    },
 	    mounted() {
-	      console.log('this is current quill instance object', this.editor)
+	      console.log('this is current quill instance object', this.editor);
+	      quill.format('size', 'large');
 	    }
 	}
 </script>
@@ -224,11 +214,11 @@
 		text-indent: 15px;
 	}
 
-	.input-title:focus {
+/*	.input-title:focus {
 		border: 1px solid #6dc5f7!important;
-	}
+	}*/
 
-	.input-title:hover {
+	.input-title:hover,.input-title:focus {
 		border: 1px solid #7d8183;
 	}
 
@@ -265,21 +255,9 @@
 		z-index: 9;
 	}
 
-	.classify-box:hover {
+	.classify-box:hover{
 		border: 1px solid #7d8183;
 	}
-
-	.classify-box:focus {
-		border: 1px solid #6dc5f7!important;
-	}
-
-/*	.box-text:focus .iconfont {
-		transform: rotate(180deg);
-	}*/
-
-/*	.classify-box .box-text:focus .classify-box{
-		border: 1px solid #6dc5f7;
-	}*/
 
 	.box-text {
 		display: inline-block;
@@ -292,7 +270,6 @@
 		border-radius: 5px;
 		z-index: 1;
 	}
-
 
 	.iconfont {
 		display: inline-block;	

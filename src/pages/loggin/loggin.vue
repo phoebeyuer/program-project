@@ -135,7 +135,7 @@
 
 	/*注册表单样式*/
 	.register-container {
-		background: #efefef;
+		background: #fff;
 	}
 
 	.register-table {
@@ -194,6 +194,7 @@
 		width: 378px;
 		border: 1px solid #efefef;
 		border-radius: 2px;
+		transition: border 0.5s;
 
 	}
 

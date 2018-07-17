@@ -14,9 +14,11 @@
 				<div class="second-content">
 					<div class="item-pubtitle">{{item.pubTitle}}</div>
 					<div class="item-icon">
-						<span class="iconfont">&#xe6a7;</span>					
-						<span class="iconfont">&#xe669;</span>
-						<span class="iconfont">&#xe62a;</span>
+						<span class="iconfont">&#xe6a7;</span>		
+						<span class="iconfont" v-bind:style="{display: showOrHide1}" @click="changeColor1($event)">&#xe669;</span>	
+						<span class="iconfont color-red" v-bind:style="{display: showOrHide2}" @click="changeColor2">&#xe668;</span>	
+						<span class="iconfont collect-icon" v-bind:style="{display: showOrHide3}" @click="changeColor3">&#xe62a;</span>
+						<span class="iconfont collect-icon color-red" v-bind:style="{display: showOrHide4}" @click="changeColor4">&#xe62b;</span>						
 					</div>
 				</div>
 				<div class="underline"></div>
@@ -29,6 +31,10 @@
 	export default {
 		data() {
 			return {
+				showOrHide1: '',
+				showOrHide2: 'none',
+				showOrHide3: '',
+				showOrHide4: 'none',
 				hotArtical: [
 				{
 					pubName: '银月',
@@ -67,7 +73,23 @@
 			goToArtical(index) {
 				console.log('点击了' + index)
 			},
-
+			changeColor1(e) {
+				console.log(e.target);
+				this.showOrHide1 = 'none';
+				this.showOrHide2 = 'inline';
+			},
+			changeColor2() {
+				this.showOrHide1 = 'inline';
+				this.showOrHide2 = 'none';
+			},
+			changeColor3() {
+				this.showOrHide3 = 'none';
+				this.showOrHide4 = 'inline';
+			},
+			changeColor4() {
+				this.showOrHide3 = 'inline';
+				this.showOrHide4 = 'none';
+			},
 			
 		}
 	}
@@ -113,6 +135,15 @@
 	.item-icon span {
 		margin-left: 10px;
 		font-size: 20px;
+		cursor: pointer;
+	}
+
+	.color-red {
+		color: #dc2929;
+	}
+
+	.collect-icon {
+		font-size: 25px!important;
 	}
 
 	.underline {
