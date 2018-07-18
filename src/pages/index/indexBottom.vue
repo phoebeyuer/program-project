@@ -1,5 +1,6 @@
 <template>
 	<div class="bottom-container">
+		<!-- 网页底部作者信息板块 -->
 		<div class="underline"></div>
 		<div class="bottom-content">
 			<span>Made by Silvermoon&nbsp;<img src="./../../assets/image/phoebe.jpg"/></span>
@@ -23,7 +24,6 @@
 		height: 58px;
 		margin: 0 auto;
 		margin-top: 320px;
-		/*margin-top: 20px;*/
 	}
 
 	.underline {
@@ -35,13 +35,6 @@
 	.bottom-content {
 		height: 56px;
 	}
-
-/*	img {
-		float: left;
-		height: 56px;
-		width: 172px;
-		overflow: hidden;		
-	}*/
 
 	.bottom-content span {
 		height: 56px;

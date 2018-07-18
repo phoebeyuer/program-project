@@ -1,5 +1,6 @@
 <template>
 	<div class="home-swiper">
+		<!-- 轮播图组件 -->
 		<swiper :options="swiperOption" ref="mySwiper">
 			<swiper-slide><img class="swiper-pic" src="./../../assets/image/swiper-pic1.png"/></swiper-slide>
 			<swiper-slide><img class="swiper-pic" src="./../../assets/image/swiper-pic2.png"/></swiper-slide>
@@ -14,16 +15,17 @@
 </template>
 
 <script>
+	// 在组件内引入轮播图
 	import "swiper/dist/css/swiper.css";
 	import {swiper, swiperSlide} from "vue-awesome-swiper";
 	export default {
-		// name: 'homeSwiper',
 		components: {
 			swiper,
 			swiperSlide
 		},	
 		data() {
 			return {
+				// 轮播图功能设置
 				swiperOption: {
 					loop: true,
 					pagination: {

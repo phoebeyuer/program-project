@@ -1,5 +1,6 @@
 <template>
 	<div id="nav-container">
+		<!-- 使用v-for生成博客导航条 -->
 		<div class="title">
 			<li class="title-list" 
 				v-for="(item,index) in nav"
@@ -16,6 +17,7 @@
 		</div>
 		<div class="title-line">
 		</div>
+		<!-- 防止博客板块的子路由内容 -->
 		<router-view></router-view>
 	</div>
 </template>
@@ -24,6 +26,7 @@
 	export default {
 		data() {
 			return {
+				// 博客导航条内容数据
 				nav: [
 					{
 						title:'所有分类',

@@ -1,6 +1,8 @@
 <template>
+	<!-- 写博客板块 -->
 	<div id="blog-container" @click=hideClassifyBox($event)>
 		<div class="blog-information">
+			<!-- 文章标题输入框 -->
 			<div class="blog-title">
 				<div class="info-text">文章标题</div>
 				<input class="input-title" 
@@ -8,6 +10,7 @@
 					   placeholder="请输入文章标题"
 					    />
 			</div>
+			<!-- 文章所属分类显示框 -->
 			<div class="blog-select blog-classify">
 				<div class="info-text">所属分类</div>
 				<a id="classifyBox" href="javascript:;" class="classify-box classify-box1">
@@ -17,6 +20,7 @@
 					</div>
 				</a>
 			</div>
+			<!-- 文章技术分类显示框 -->
 			<div class="blog-select blog-type">
 				<div class="info-text">技术分类</div>
 				<a id="classifyBox2" href="javascript:;" class="classify-box classify-box1">
@@ -26,6 +30,7 @@
 					</div>
 				</a>
 			</div>
+			<!-- 文章所属分类下拉选择框实现 -->
 			<div class="ul-container">
 					<ul v-bind:class="{classifyBoxShow: isClassifyShow, classifyBoxHidden: isClassifyHidden}">
 						<li @click="chooseItem($event)">入门学习</li>
@@ -33,6 +38,7 @@
 						<li @click="chooseItem($event)">开源项目</li>
 					</ul>
 			</div>
+			<!-- 文章技术分类下拉选择框实现 -->
 			<div class="ul-container2">
 					<ul v-bind:class="{classifyBoxShow2: isClassifyShow2, classifyBoxHidden2: isClassifyHidden2}">
 						<li @click="chooseItem2($event)">Html</li>
@@ -41,6 +47,7 @@
 					</ul>
 			</div>
 		</div>
+			<!-- 富文本工具 -->
 		<div id="editor">
 			<quill-editor v-model="content"
 						  ref="myQuillEditor"
@@ -58,6 +65,7 @@
 </template>
 
 <script>
+	//引入富文本工具vue-quill-editor
 	import 'quill/dist/quill.core.css'
 	import 'quill/dist/quill.snow.css'
 	import 'quill/dist/quill.bubble.css'
@@ -76,6 +84,7 @@
 				isClassifyHidden2: true,
 				choosebox1: '',
 				choosebox2: '',
+				// 博客默认内容及工具栏功能定制，加粗功能有bug，博客默认字体太小需修改
 				content: '<h2>Write here……<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></h2>',
  				editorOption: {
           			modules: {
@@ -83,8 +92,7 @@
 			              ['bold'],
 			              ['blockquote', 'code-block'],
 			              [{ 'indent': '-1' }, { 'indent': '+1' }],
-			              // [{ 'size': ['small', false, 'large', 'huge'] }],
-			              [{ 'size': ['small', 'normal', 'large', 'huge'] }],
+			              [{ 'size': ['small', 'normal', 'large', 'huge'] }],    //博客默认字体为normal，字体太小需修改
 			              ['link', 'image'],
 			            ],
 					},
@@ -103,11 +111,13 @@
 		    onEditorReady(quill) {
 		      console.log('editor ready!', quill)
 		    },
+		    // 实现点击网页任意地方隐藏下拉选项框
 		    hideClassifyBox(e) {
 		    	var e = e || window.event;
 		    	var elem = e.target
 		    	while(elem) {
 		    		if(elem.id){
+		    			// 阻止事件冒泡到2个文章分类的显示框上
 		    			if( elem.id == 'classifyBox' || elem.id == 'classifyBox2'){
 		    				return;
 		    			}
@@ -118,8 +128,8 @@
 		    	this.isClassifyHidden = true;
 		    	this.isClassifyShow2 = false;
 		    	this.isClassifyHidden2 = true;
-		    	console.log('我被触发了');
 		    },
+		    //显示文章所属分类的下拉框
 		    showClassifyList() {
 		    	this.isClassifyShow = !this.isClassifyShow;
 		    	this.isClassifyHidden = !this.isClassifyHidden;
@@ -127,18 +137,21 @@
 		    	this.isClassifyHidden2 = true;
 
 		    },
+		    //显示文章技术分类的下拉框
 		    showClassifyList2() {
 		    	this.isClassifyShow2 = !this.isClassifyShow2;
 		    	this.isClassifyHidden2 = !this.isClassifyHidden2;
 		    	this.isClassifyShow = false;
 		    	this.isClassifyHidden = true;
 		    },
+		    //将选中的文章所属分类传值到显示框上
 		    chooseItem(e) {
 		    	this.choosebox1 = e.target.innerText;
 		    	console.log(e.target.innerText);
 		    	this.isClassifyHidden = true;
 		    	this.isClassifyShow = false;
 		    },
+		    //将选中的文章技术分类传值到显示框上
 		    chooseItem2(e) {
 		    	this.choosebox2 = e.target.innerText;
 		    	console.log(e.target.innerText);
@@ -159,6 +172,7 @@
 </script>
 
 <style type="text/css" scoped>
+	/*富文本工具样式*/
 	#editor {
 		margin: 0 auto;
 		width: 1200px;
@@ -168,8 +182,8 @@
 		z-index: 10;
 	}	
 
+	/*写博客界面容器样式*/
 	#blog-container {
-		/*width: 1200px;*/
 		height: 100%;
 		font-weight: normal;
 		font-family: '宋体';
@@ -177,6 +191,7 @@
 		z-index: 1;
 	}
 
+	/*文章标题、文章所属分类及技术分类显示框样式*/
 	.blog-information {
 		margin-top: 20px;
 		margin-bottom: 20px;
@@ -188,7 +203,6 @@
 	.blog-title {
 		display: inline-block;
 		height: 40px;
-		/*vertical-align: middle;*/
 	}
 
 	.info-text {
@@ -214,10 +228,6 @@
 		text-indent: 15px;
 	}
 
-/*	.input-title:focus {
-		border: 1px solid #6dc5f7!important;
-	}*/
-
 	.input-title:hover,.input-title:focus {
 		border: 1px solid #7d8183;
 	}
@@ -230,14 +240,6 @@
 
 	.blog-classify {
 		margin-left: 80px;
-	}
-
-	.ul-container {
-		margin-left: 690px;
-	}
-
-	.ul-container2 {
-		margin-left: 1004px;
 	}
 
 	.classify-box {
@@ -276,6 +278,15 @@
 		transition: 0.5s;
 	}
 
+	/*两个下拉选项框样式*/
+	.ul-container {
+		margin-left: 690px;
+	}
+
+	.ul-container2 {
+		margin-left: 1004px;
+	}
+
 	.classifyBoxShow {
 		display: block;
 		margin-top: 10px;
@@ -293,7 +304,6 @@
 	}
 
 	.classifyBoxHidden {
-		/*display: none;*/
 		height: 0px; 
 		transition: height 0.1s;
 		overflow: hidden;
@@ -316,7 +326,6 @@
 	}
 
 	.classifyBoxHidden2 {
-		/*display: none;*/
 		height: 0px; 
 		transition: height 0.15s;
 		overflow: hidden;
@@ -334,6 +343,7 @@
 		background: #e4e8f1;
 	}
 
+	/*博客提交按钮样式*/
 	.blog-submit {
 		margin: 0 auto;
 		margin-top: 20px;

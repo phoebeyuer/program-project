@@ -1,5 +1,6 @@
 <template>
 	<div id="nav-container">
+		<!-- 使用v-for实现首页轮播图下的5个导航按钮 -->
 		<div class="title">
 			<li class="title-list" 
 				v-for="(item,index) in nav"
@@ -22,6 +23,7 @@
 	export default {
 		data() {
 			return {
+				// 导航内容数据
 				nav: [
 					{
 						title: '热门文章',

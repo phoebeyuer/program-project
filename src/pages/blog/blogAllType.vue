@@ -1,9 +1,11 @@
 <template>
 	<div class="hot-artical-container">
+		<!-- 实现最新和最热博客间的切换 -->
 		<div class="toggle-btn">
 			<div @click="toggleNewest" v-bind:class="[newest,{active: activeNewest}]">最新</div>
 			<div @click="toggleHottest" v-bind:class="[hottest,{active: activeHottest}]">最热</div>
 		</div>
+		<!-- 使用v-for生成博客基本信息展示界面 -->
 		<ul>
 			<li v-for="(item,index) in hotArtical" 
 				:key="index"
@@ -37,6 +39,7 @@
 				activeHottest: false,
 				newest: 'newest',
 				hottest: 'hottest',
+				// 每条博客的信息数据
 				hotArtical: [
 				{
 					pubName: '银月',
@@ -72,13 +75,16 @@
 			}
 		},
 		methods: {
+			// 实现点击博客跳转到该条博客页面
 			goToArtical(index) {
 				console.log('点击了' + index)
 			},
+			// 切换到最新博客界面
 			toggleNewest() {
 				this.activeNewest = true;
 				this.activeHottest = false;
 			},
+			// 切换到最热博客界面
 			toggleHottest() {
 				this.activeNewest = false;
 				this.activeHottest = true;
@@ -93,6 +99,7 @@
 		font-family: '微软雅黑';
 	}
 
+	/*切换最新及最热博客样式*/
 	.toggle-btn {
 		width: 1200px;
 		height: 45px;
@@ -136,6 +143,7 @@
 		color: white;
 	}
 
+	/*博客基本信息展示界面样式*/
 	li {
 		margin-top: 20px;
 		height: 78px;

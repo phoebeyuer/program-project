@@ -1,5 +1,6 @@
 <template>
 	<div class="register-index-container">		
+		<!-- 顶部5个导航按钮界面 -->
 		<div class="register-pannel">
 			<div class="pannel-container">
 				<img class="index-logo" src="./../../assets/image/index-logo.png"/>
@@ -10,14 +11,17 @@
 				<router-link to="/loggin" tag="span"><span class="tab-link" >登录</span></router-link>
 			</div>		
 		</div>
-			<div class="index-main">
-				<router-view></router-view>
-			</div>
-			<IndexBottom></IndexBottom>		
+		<!-- 导航的子路由内容显示 -->
+		<div class="index-main">
+			<router-view></router-view>
+		</div>
+		<!-- 底部作者信息界面 -->
+		<IndexBottom></IndexBottom>		
 	</div>
 </template>
 
 <script>
+	// 导入底部作者信息板块
 	import IndexBottom from './indexBottom'
 	export default {
 		components: {
@@ -36,7 +40,6 @@
 		margin-top: 120px;
 		width: 100%;
 		height: 90px;
-		/*background: #efefef;*/
 		background: #fff;
 	}
 
@@ -54,6 +57,7 @@
 		box-shadow: darkgrey 0px 0px 10px 1px ;
 	}
 
+	/*网页主导航条样式*/
 	.pannel-container {
 		height: 90px;
 		width: 1200px;

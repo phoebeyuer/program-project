@@ -2,8 +2,10 @@
 		<div class="register-container">
 			<div class="register-table">
 				<div class="table-container">
+					<!-- 欢迎标语 -->
 					<p class="welcome-logo">{{welcomeLogo}}</p>
 					<p class="register-underline"></p>
+					<!-- 输入手机号文本框 -->
 					<div class="input-box">
 						<input :class="showBorder ? 'register-box show-box-border' : 'register-box'" 
 							   type="text" 
@@ -13,7 +15,9 @@
 							   @blur="checkPhoneNumber"/>							   
 						<span :class="showicon ? 'icon-show iconfont' : 'icon-hidden iconfont'">&#xe625;</span>			
 					</div>
+					<!-- 手机号输入错误提示框 -->
 					<div class="show-error">{{showPhoneInputError}}</div>
+					<!-- 输入密码框 -->
 					<div class="input-box">
 						<input :class="showBorder2 ? 'register-box show-box-border' : 'register-box'" 
 						       type="password" 
@@ -23,7 +27,9 @@
 						       @blur="checkLogginCode"/>
 						<span :class="showicon2 ? 'icon-show iconfont' : 'icon-hidden iconfont'">&#xe625;</span>
 					</div>
+					<!-- 密码输入错误提示框 -->
 					<div class="show-error">{{showCodeInputError}}</div>
+					<!-- 登录界面下面的一些功能按钮 -->
 					<div class="register-bar">
 						<input class="register-checkbox" type="checkbox" name="registerCheckbox" checked="checked"/>
 						<span>下次自动登录</span>
@@ -55,9 +61,11 @@
 			console.log(window.innerWidth + 'px');
 		},
 		methods: {
+			// 点击注册按钮跳转到注册界面
 			jumpToRegister() {
 				this.$router.push({path:'/register'})
 			},
+			// 检查输入的手机号码及对应密码是否有误
 			checkLogginName() {
 				var date = new Date();
 				console.log(date);
@@ -82,6 +90,7 @@
 					}
 				})
 			},
+			// 检查输入的手机号码格式是否有误
 			checkPhoneNumber(e) {
 				console.log(e.target.value.trim());
 				if(e.target.value.trim().search(/[^0-9]/g) == -1){
@@ -103,6 +112,7 @@
 					this.showBorder = true;
 				}				
 			},
+			// 检查输入的密码格式是否有误
 			checkLogginCode(e) {
 				console.log(e.target.value.trim());
 				if(e.target.value.trim().search(/[0-9]/g) != -1 && e.target.value.trim().search(/[a-zA-Z]/g) != -1) {

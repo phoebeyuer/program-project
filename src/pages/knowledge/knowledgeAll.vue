@@ -1,9 +1,11 @@
 <template>
 	<div class="hot-artical-container">
+		<!-- 最新和最热知识切换 -->
 		<div class="toggle-btn">
 			<div @click="toggleNewest" v-bind:class="[newest,{active: activeNewest}]">最新知识</div>
 			<div @click="toggleHottest" v-bind:class="[hottest,{active: activeHottest}]">最热知识</div>
 		</div>
+		<!-- 使用v-for生成知识板块内容 -->
 		<ul>
 			<li v-for="(item,index) in hotArtical" 
 				:key="index"
@@ -38,6 +40,7 @@
 				activeHottest: false,
 				newest: 'newest',
 				hottest: 'hottest',
+				// 知识板块文章内容数据
 				hotArtical: [
 				{
 					pubName: '银月',
@@ -73,13 +76,16 @@
 			}
 		},
 		methods: {
+			// 点击知识板块的文章进入具体内容界面
 			goToArtical(index) {
 				console.log('点击了' + index)
 			},
+			// 切换到最新知识
 			toggleNewest() {
 				this.activeNewest = true;
 				this.activeHottest = false;
 			},
+			// 切换到最热知识
 			toggleHottest() {
 				this.activeNewest = false;
 				this.activeHottest = true;
@@ -90,10 +96,10 @@
 
 <style type="text/css" scoped>
 	.hot-artical-container {
-		/*margin-top: 20px;*/
 		font-family: '微软雅黑';
 	}
 
+	/*最新知识和最热知识切换按钮样式*/
 	.toggle-btn {
 		width: 1200px;
 		height: 45px;
@@ -137,6 +143,7 @@
 		color: white;
 	}
 
+	/*知识板块文章样式*/
 	li {
 		margin-top: 20px;
 		height: 78px;
@@ -176,8 +183,6 @@
 		background: #e7171e;
 		border: 1px solid white;
 		font-size: 16px;
-		/*font-weight: bold;*/
-		/*letter-spacing: 2px;*/
 		color: white;
 		border-radius: 20px;
 		cursor: pointer;
@@ -186,11 +191,6 @@
 	.item-icon:hover {
 		background-color: rgba(240,24,32,0.8);
 	}
-
-/*	.item-icon span {
-		margin-left: 10px;
-		font-size: 20px;
-	}*/
 
 	.underline {
 		width: 1200px;

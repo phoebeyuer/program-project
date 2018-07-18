@@ -10,6 +10,7 @@ export default new Router({
       path: '/',
       name: 'Pannel',
       component: () => import('@/pages/index/pannel'),
+      //主页板块
       redirect: {name: 'Home'},
       children: [
       {
@@ -45,6 +46,7 @@ export default new Router({
         }
         ]
       },
+      //知识体系板块
       {
         path: 'knowledge',
         name: 'Knowledge',
@@ -78,11 +80,13 @@ export default new Router({
         },
         ]
       },
+      //话题板块（该板块暂未填充内容）
       {
         path: 'topic',
         name: 'Topic',
         component: () => import('@/pages/index/components/topic')
       },
+      //博客板块
       {
         path: 'blog',
         name: 'Blog',
@@ -111,16 +115,19 @@ export default new Router({
         },
         ]
       },
+      //登录功能
       {
         path: 'loggin',
         name: 'Loggin',
         component: () => import('@/pages/loggin/loggin')
       },
+      //注册功能
       {
         path: 'register',
         name: 'Register',
         component: () => import('@/pages/register/register')
       },
+      //写博客功能，采用富文本实现
       {
         path: 'blogWrite',
         name: 'BlogWrite',

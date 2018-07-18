@@ -5,8 +5,8 @@ import App from './App'
 import router from './router'
 import axios from 'axios'
 // import 'lib-flexible'
-import './assets/reset.css'
-import './assets/styles/iconfont.css'
+import './assets/reset.css'                  //导入重置样式
+import './assets/styles/iconfont.css'        //导入iconfont样式
 
 // 将aixos改写为Vue的原型属性
 Vue.prototype.$ajax = axios;

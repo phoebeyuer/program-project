@@ -3,8 +3,10 @@
 		<div class="register-container">
 			<div class="register-table">
 				<div class="table-container">
+					<!-- 注册界面欢迎标语 -->
 					<p class="welcome-logo">{{welcomeLogo}}</p>
 					<p class="register-underline"></p>
+					<!-- 输入手机号码文本框 -->
 					<div class="input-box">
 						<input :class="showBorder ? 'register-box show-box-border' : 'register-box'" 
 						       type="text" 
@@ -13,7 +15,9 @@
 						       @blur="checkRegisterNumber"/>
 						<span :class="showicon ? 'icon-show iconfont' : 'icon-hidden iconfont'">&#xe625;</span>	
 					</div>
+					<!-- 输入手机号码错误提示框 -->
 					<div class="show-error">{{showPhoneInputError}}</div>
+					<!-- 首次输入密码框 -->
 					<div class="input-box">
 						<input :class="showBorder2 ? 'register-box show-box-border' : 'register-box'"
 						       type="password" 
@@ -22,7 +26,9 @@
 						       @blur="checkRegisterCode"/>
 						<span :class="showicon2 ? 'icon-show iconfont' : 'icon-hidden iconfont'">&#xe625;</span>	
 					</div>
+					<!-- 首次输入密码错误提示框 -->
 					<div class="show-error">{{showCodeInputError}}</div>
+					<!-- 再次输入密码框 -->
 					<div class="input-box">
 						<input :class="showBorder3 ? 'register-box show-box-border' : 'register-box'" 
 						       type="password" 
@@ -31,8 +37,10 @@
 						       @blur="checkRegisterCodeAgain"/>
 						<span :class="showicon3 ? 'icon-show iconfont' : 'icon-hidden iconfont'">&#xe625;</span>
 					</div>
-					<div class="show-error">{{showCodeInputError2}}</div>
+					<!-- 再次输入密码错误提示框 -->
+					<div class="show-error">{{showCodeInputError2}}</div>					
 					<div class="table-intergrate">
+						<!-- 注册界面随机码输入框及随机码产生按钮 -->
 						<div class="random-box">
 							<input :class="showRandomBorder ? 'register-box2 show-random-border' : 'register-box2'" 
 							       type="text" 
@@ -43,7 +51,9 @@
 						</div>
 						<input type="button" id="randomCode" @click="createCode();createBackground()" v-model="checkCode"></div>
 					</div>
+					<!-- 随机码输入错误提示框 -->
 					<div class="random-code-error">{{randomCodeError}}</div>
+					<!-- 注册界面验证短信功能,因未上线暂未添加进来 -->
 <!-- 					<div class="table-intergrate">
 						<input class="register-box2" type="text" name="inputName" placeholder="请输入短信验证码"/>
 						<div id="sendPhoneCode">获取验证码</div>
@@ -77,6 +87,7 @@
 		},
 		mounted() {
 			console.log(window.innerWidth + 'px');
+			// 注册界面就绪时产生随机验证码
 			this.createCode();
 		},
 		methods: { 

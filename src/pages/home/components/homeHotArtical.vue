@@ -1,5 +1,6 @@
 <template>
 	<div class="hot-artical-container">
+		<!-- 使用v-for生成热门文章界面 -->
 		<ul>
 			<li v-for="(item,index) in hotArtical" 
 				:key="index"
@@ -35,6 +36,7 @@
 				showOrHide2: 'none',
 				showOrHide3: '',
 				showOrHide4: 'none',
+				// 热门文章内容
 				hotArtical: [
 				{
 					pubName: '银月',
@@ -70,9 +72,11 @@
 			}
 		},
 		methods: {
+			// 实现点击文章后跳转到文章内容界面
 			goToArtical(index) {
 				console.log('点击了' + index)
 			},
+			// like按钮功能实现
 			changeColor1(e) {
 				console.log(e.target);
 				this.showOrHide1 = 'none';
@@ -82,6 +86,7 @@
 				this.showOrHide1 = 'inline';
 				this.showOrHide2 = 'none';
 			},
+			// 收藏按钮功能实现
 			changeColor3() {
 				this.showOrHide3 = 'none';
 				this.showOrHide4 = 'inline';
